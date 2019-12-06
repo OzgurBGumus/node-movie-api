@@ -135,7 +135,7 @@ router.delete('/:director_id', (req,res,next)=>{
       next({message: 'Movie is not found.'});
     }
     else{
-      res.json({status: 1});
+      res.json(data);
     }
   }).catch((err) => {
     res.json(err);

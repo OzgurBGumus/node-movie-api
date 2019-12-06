@@ -27,6 +27,12 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', () =>{
         .end((err,res)=>{
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body[0].should.have.property('title');
+          res.body[0].should.have.property('director_id');
+          res.body[0].should.have.property('imdb_score');
+          res.body[0].should.have.property('category');
+          res.body[0].should.have.property('country');
+          res.body[0].should.have.property('year');
           done();
         });
     });
@@ -61,13 +67,19 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', () =>{
     });
   });
   describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>/GET /movies/Top10 Test', () =>{
-    it('Done.',(done) =>{
+    it('Done.', (done) =>{
       chai.request(server)
         .get('/api/movies/top10')
         .set('x-access-token', token)
         .end((err,res)=>{
           res.should.have.status(200);
           res.should.be.a('object');
+          res.body[0].should.have.property('title');
+          res.body[0].should.have.property('director_id');
+          res.body[0].should.have.property('imdb_score');
+          res.body[0].should.have.property('category');
+          res.body[0].should.have.property('country');
+          res.body[0].should.have.property('year');
           done();
         });
     });
@@ -80,6 +92,12 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', () =>{
         .end((err,res) =>{
           res.should.have.status(200);
           res.should.be.a('object');
+          res.body.should.have.property('title').eql('Udemy');
+          res.body.should.have.property('director_id').eql('5de452f1d0ec6446a48a1b25');
+          res.body.should.have.property('imdb_score').eql(10);
+          res.body.should.have.property('category').eql('Sci-Fi');
+          res.body.should.have.property('country').eql('USA');
+          res.body.should.have.property('year').eql(2020);
           done();
         });
     });
@@ -116,10 +134,16 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', () =>{
     it('Done.', (done) =>{
       chai.request(server)
         .delete('/api/movies/'+temp_Movie_id)
-        .set('x-access-token', 'asdasdasd')
+        .set('x-access-token', token)
         .end((err,res)=>{
           res.should.have.status(200);
           res.body.should.be.a('object');
+          res.body.should.have.property('title').eql('UpdateTest');
+          res.body.should.have.property('director_id').eql('5de452f1d0ec6446a48a1b25');
+          res.body.should.have.property('imdb_score').eql(3);
+          res.body.should.have.property('category').eql('Horror');
+          res.body.should.have.property('country').eql('Germany');
+          res.body.should.have.property('year').eql(2013);
           done();
         })
     });

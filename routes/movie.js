@@ -45,8 +45,8 @@ router.get('/', (req,res)=>{
 router.get('/top10', (req,res,next)=>{
   const promise = Movie.find({}).sort({'imdb_score': -1}).limit(10);
 
-  promise.then((movie)=>{
-    res.json(movie);
+  promise.then((data)=>{
+    res.json(data);
   }).catch((err) => {
     res.json(err);
   });
@@ -87,7 +87,7 @@ router.put('/:movie_id', (req,res,next) =>{
   });
 });
 router.delete('/:movie_id', (req,res,next) =>{
-  const promise = Movie.findByIdAndRemove(req.params.movie_id);
+  const promise = Movie.findByIdAndDelete(req.params.movie_id);
 
   promise.then((movie) =>{
     if(!movie){

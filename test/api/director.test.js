@@ -6,6 +6,7 @@ const server = require('../../app');
 
 let token;
 let _id;
+let createdAt;
 chai.use(chaiHttp);
 describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', ()=>{
   before((done)=>{
@@ -25,6 +26,9 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', ()=>{
         .end((err,res)=>{
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body[0].should.have.property('name');
+          res.body[0].should.have.property('surname');
+          res.body[0].should.have.property('movies');
           done();
         });
     });
@@ -37,6 +41,7 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', ()=>{
         .set('x-access-token', token)
         .end((err,res)=>{
           _id = res.body._id;
+          createdAt = res.body.createdAt;
           res.should.have.status(200);
           res.should.be.a('object');
           res.body.should.have.property('name').eql('DirectorTestName');
@@ -53,23 +58,30 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', ()=>{
         .set('x-access-token', token)
         .end((err,res)=>{
           res.should.have.status(200);
-          res.should.be.a('object');
-          /*res.should.have.property('name');
-          res.should.have.property('surname');
-          res.should.have.property('bio');*/
+          res.body.should.be.a('array');
+          res.body[0].should.have.property('name');
+          res.body[0].should.have.property('surname');
+          res.body[0].should.have.property('movies');
           done();
         });
     });
   });
   describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>/DELETE/:_id /directors Test', ()=>{
     it('Done.', (done)=>{
+      let deleted = {
+        __v:0,
+        _id:_id,
+        name: 'DirectorTestName',
+        surname: 'DirectorTestSurname',
+        bio: 'DirectorTestBio',
+        createdAt:createdAt
+      };
       chai.request(server)
         .delete('/api/directors/'+_id)
         .set('x-access-token', token)
         .end((err,res)=>{
           res.should.have.status(200);
-          res.should.be.a('object');
-          res.should.have.property('status');
+          res.body.should.be.a('object').eql(deleted);
           done();
         });
 
