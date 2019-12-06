@@ -116,7 +116,7 @@ describe('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Authenticate Test', () =>{
     it('Done.', (done) =>{
       chai.request(server)
         .delete('/api/movies/'+temp_Movie_id)
-        .set('x-access-token', token)
+        .set('x-access-token', 'asdasdasd')
         .end((err,res)=>{
           res.should.have.status(200);
           res.body.should.be.a('object');
