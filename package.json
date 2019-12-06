@@ -17,11 +17,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.12",
-    "morgan": "~1.9.1"
-  },
-  "devDependencies": {
+    "morgan": "~1.9.1",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "mocha": "^6.2.2"
+  },
+  "devDependencies": {
+
   }
 }
