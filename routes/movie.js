@@ -27,7 +27,7 @@ router.post('/', (req, res, next) => {
 
   const promise = movie.save();
   promise.then((data)=>{
-    res.json({status:1});
+    res.json(data);
   }).catch((err) => {
     res.json(err);
   });
@@ -70,7 +70,10 @@ router.get('/:movie_id', (req,res,next) =>{
 router.put('/:movie_id', (req,res,next) =>{
   const promise = Movie.findByIdAndUpdate(
     req.params.movie_id,
-    req.body
+    req.body,
+    {
+      new:true
+    }
   );
   promise.then((movie) =>{
     if(!movie){

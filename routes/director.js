@@ -14,8 +14,7 @@ router.post('/', (req,res,next) =>{
 
   const promise = director.save();
   promise.then((data)=>{
-    console.log('Ok!');
-    res.json({status:1});
+    res.json(data);
   }).catch((err) => {
     res.json(err);
   });
@@ -124,6 +123,20 @@ router.get('/:director_id', (req,res,next)=>{
     //else{
       res.json(data);
     //}
+  }).catch((err) => {
+    res.json(err);
+  });
+});
+router.delete('/:director_id', (req,res,next)=>{
+  const promise = Director.findByIdAndRemove(req.params.director_id);
+
+  promise.then((data)=>{
+    if(!data){
+      next({message: 'Movie is not found.'});
+    }
+    else{
+      res.json({status: 1});
+    }
   }).catch((err) => {
     res.json(err);
   });
