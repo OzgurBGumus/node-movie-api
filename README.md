@@ -1,4 +1,4 @@
-[!Build Status(https://travis-ci.org/OzgurBGumus/node-movie-api.svg)](https://travis-ci.org/OzgurBGumus/node-movie-api)
+[![Build Status](https://travis-ci.org/OzgurBGumus/node-movie-api.svg)](https://travis-ci.org/OzgurBGumus/node-movie-api)
 
 
 # node-movie-api
